@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+        <div *ngFor="let data of serviceList" class="col-4" [routerLink]="['/service', data.ResourceGroup]">
+            <div class="card mb-3 card-ponter" [ngClass]="{
+                    'text-white bg-success' : data.ConsumedQuantity == maxusedService,
+                    'text-white bg-primary' : data.ConsumedQuantity > 5 && maxusedService > data.ConsumedQuantity,
+                    'text-white bg-info' : data.ConsumedQuantity >= 1 && maxusedService != data.ConsumedQuantity &&  data.ConsumedQuantity <= 5
+                }">
+                <h6 class="card-header" [title]="data.ResourceGroup">
+                    {{data.ResourceGroup?.substr(0, 15) +
+                    (data.ResourceGroup.length > 15 ? "..." : "")}} <span class="float-end">{{data.Date}}</span>
+                </h6>
+                <div class="card-body">
+                    <div class="card-title" [title]="data.ServiceName">{{data.ServiceName?.substr(0, 20) +
+                        (data.ServiceName.length > 20 ? "..." : "")}}</div>
+                    <div class="card-text">
+                        <div class="row ">
+                            <div class="col-5">High Usage</div>:
+                            <div class="col-6">{{data.ConsumedQuantity}}</div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-5">Location</div>:
+                            <div class="col-6">{{data.ResourceLocation}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
